@@ -24,7 +24,7 @@ describe("<EditContactsScreen />", () => {
 	const tree = renderComponentToJSON(EditContactsScreen, props);
 
 	it("should render contact form", () => {
-		expect(tree.props.testID).toBe("contactForm");
+		expect(tree[1].props.testID).toBe("contactForm");
 	});
 
 	test("contact form should populated with correct values ", async () => {

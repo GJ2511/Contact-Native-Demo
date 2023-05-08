@@ -18,7 +18,12 @@ export default function App() {
 		<NavigationContainer>
 			<SafeAreaView style={{ flex: 1 }}>
 				<ContactsProvider>
-					<Stack.Navigator initialRouteName="MyContact">
+					<Stack.Navigator
+						initialRouteName="MyContact"
+						screenOptions={{
+							headerShown: false,
+						}}
+					>
 						<Stack.Screen
 							name="MyContact"
 							component={IndexScreen}

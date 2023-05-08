@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 
 import ContactForm from "../components/ContactForm";
 import { Context } from "../context/ContactContext";
+import HeaderComponent from "../components/Header";
 import normalize from "../utils/normalize";
 
 const EditContactsScreen = ({ navigation, route }) => {
@@ -15,18 +16,21 @@ const EditContactsScreen = ({ navigation, route }) => {
 	}
 
 	return (
-		<ContactForm
-			buttonText="Update Contact"
-			firstNameInitial={contactInfo.firstName}
-			lastNameInitial={contactInfo.lastName}
-			emailInitial={contactInfo.email}
-			phoneNumberInitial={contactInfo.phoneNumber}
-			onSubmit={(contactInfo) => {
-				editContact(id, contactInfo, () =>
-					navigation.navigate("MyContact")
-				);
-			}}
-		/>
+		<>
+			<HeaderComponent title={`Create Contact`} navigation={navigation} />
+			<ContactForm
+				buttonText="Update Contact"
+				firstNameInitial={contactInfo.firstName}
+				lastNameInitial={contactInfo.lastName}
+				emailInitial={contactInfo.email}
+				phoneNumberInitial={contactInfo.phoneNumber}
+				onSubmit={(contactInfo) => {
+					editContact(id, contactInfo, () =>
+						navigation.navigate("MyContact")
+					);
+				}}
+			/>
+		</>
 	);
 };
 const styles = StyleSheet.create({

@@ -10,23 +10,23 @@ describe("<IndexScreen />", () => {
 	const tree = renderComponentToJSON(IndexScreen);
 
 	it("should render three child", () => {
-		expect(tree.children.length).toBe(3);
+		expect(tree.children.length).toBe(4);
 	});
 
-	it("first child must be SearchBox component", () => {
-		const firstChild = tree.children[0];
+	it("Second child must be SearchBox component", () => {
+		const firstChild = tree.children[1];
 		expect(firstChild.props.testID).toBe("searchBox");
 	});
-	it("Second child must be flatlist component", () => {
-		const child = tree.children[1];
+	it("Third child must be flatlist component", () => {
+		const child = tree.children[2];
 		expect(child.props.testID).toBe("contactList");
 	});
 	it("Contact List must have a children", () => {
-		const contactList = tree.children[1];
+		const contactList = tree.children[2];
 		expect(contactList.children[0].children.length).toBe(1);
 	});
 	it("Third child must be add contact icon component", () => {
-		const child = tree.children[2];
+		const child = tree.children[3];
 		expect(child.props.testID).toBe("addContactIcon");
 	});
 

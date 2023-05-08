@@ -11,6 +11,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Context } from "../context/ContactContext";
 import SearchBar from "../components/SearchBar";
 import Card from "../components/Card";
+import HeaderComponent from "../components/Header";
 import normalize from "../utils/normalize";
 
 const IndexScreen = ({ navigation }) => {
@@ -33,6 +34,11 @@ const IndexScreen = ({ navigation }) => {
 
 	return (
 		<View style={styles.container}>
+			<HeaderComponent
+				title={"My Contacts"}
+				navigation={navigation}
+				hideBack={true}
+			/>
 			<SearchBar term={term} setTerm={setTerm} />
 			<FlatList
 				data={filterContacts}

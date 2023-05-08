@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 import { getColorByLetter } from "../utils/index";
+import normalize from "../utils/normalize";
 
 export default function Card({ data }) {
 	const { firstName, lastName, phoneNumber } = data;
@@ -29,17 +30,16 @@ export default function Card({ data }) {
 
 const styles = StyleSheet.create({
 	card: {
-		padding: 5,
-		margin: 2,
+		padding: normalize(5),
+		margin: normalize(2),
 	},
 	cardBody: {
 		flexDirection: "row",
 		alignItems: "center",
 	},
 	name: {
-		fontSize: 18,
 		flex: 1,
-		marginLeft: 5,
+		marginLeft: normalize(5),
 	},
 	iconContainer: {
 		display: "flex",
@@ -53,6 +53,5 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		padding: 1,
-		borderRadius: 10,
 	},
 });

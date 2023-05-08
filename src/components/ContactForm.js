@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Button, TextInput, Alert } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import normalize from "../utils/normalize";
+
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 const NUMBER_REGEX = /[^0-9]/g;
 
@@ -107,22 +109,22 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 	},
 	inputContainer: {
-		padding: 10,
-		margin: 10,
+		padding: normalize(10),
+		margin: normalize(5),
 	},
 	inputBlock: {
 		flexDirection: "row",
-		paddingVertical: 2,
+		paddingVertical: normalize(2),
 	},
 	icon: {
-		fontSize: 25,
+		fontSize: normalize(25),
 		alignSelf: "center",
-		marginHorizontal: 10,
+		marginHorizontal: normalize(5),
 	},
 	input: {
 		borderBottomWidth: 0.5,
 		borderBottomColor: "gray",
-		padding: 10,
+		padding: normalize(5),
 		flex: 1,
 	},
 });

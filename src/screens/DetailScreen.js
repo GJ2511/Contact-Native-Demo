@@ -15,6 +15,7 @@ import { Feather } from "@expo/vector-icons";
 import { getColorByLetter } from "../utils";
 import { Context } from "../context/ContactContext";
 import normalize from "../utils/normalize";
+import HeaderComponent from "../components/Header";
 
 export default function DetailScreen({ navigation, route }) {
 	const { state, deleteContact } = useContext(Context);
@@ -27,6 +28,10 @@ export default function DetailScreen({ navigation, route }) {
 
 	return (
 		<View style={styles.container} testID="detailScreen">
+			<HeaderComponent
+				title={`${contactInfo.firstName} ${contactInfo.lastName}`}
+				navigation={navigation}
+			/>
 			<ImageBackground
 				style={{
 					...styles.backgroundImage,
@@ -84,6 +89,7 @@ export default function DetailScreen({ navigation, route }) {
 							name="call"
 							size={normalize(24)}
 							color="black"
+							style={{ alignSelf: "center" }}
 							onPress={() =>
 								Linking.openURL(
 									`tel:${contactInfo.phoneNumber}`
@@ -100,6 +106,7 @@ export default function DetailScreen({ navigation, route }) {
 							name="mail"
 							size={normalize(24)}
 							color="black"
+							style={{ alignSelf: "center" }}
 							onPress={() =>
 								Linking.openURL(`mailto:${contactInfo.email}`)
 							}
@@ -123,7 +130,6 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 	},
 	mainText: {
-		fontSize: 30,
 		color: "white",
 		fontWeight: "bold",
 	},
@@ -147,5 +153,5 @@ const styles = StyleSheet.create({
 		bottom: normalize(20),
 		right: normalize(20),
 	},
-	text: { fontSize: normalize(16), marginLeft: normalize(10) },
+	text: { marginLeft: normalize(10), flex: 1 },
 });

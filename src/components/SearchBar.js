@@ -26,11 +26,11 @@ const styles = StyleSheet.create({
 	bar: {
 		flexDirection: "row",
 		backgroundColor: "#f0f0f0",
-		paddingVertical: normalize(5),
+		paddingVertical: normalize(1),
 		borderColor: "#d0d0d0",
-		borderRadius: normalize(5),
-		marginHorizontal: normalize(10),
-		marginVertical: normalize(10),
+		borderRadius: normalize(1),
+		marginHorizontal: normalize(5),
+		marginVertical: normalize(5),
 	},
 	icon: {
 		fontSize: normalize(35),
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		flex: 1,
-		fontSize: normalize(20),
 	},
 });
 
