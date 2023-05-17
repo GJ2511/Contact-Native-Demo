@@ -1,10 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import normalize from "../utils/normalize";
 
-const HeaderComponent = ({ title, navigation, hideBack = false }) => {
+const HeaderComponent = ({ title, hideBack = false }) => {
+	const navigation = useNavigation();
+
 	return (
 		<View style={styleSheet.layout}>
 			{!hideBack && (

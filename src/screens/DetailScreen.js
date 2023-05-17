@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect } from "react";
 import {
 	View,
 	Text,
@@ -12,25 +12,35 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import { useDispatch, useSelector } from "react-redux";
+
 import { getColorByLetter } from "../utils";
 import { Context } from "../context/ContactContext";
 import normalize from "../utils/normalize";
 import HeaderComponent from "../components/Header";
+import { getContact } from "../redux/selectors/contactSelector";
+import { deleteContact } from "../redux/actions/contactActions";
 
 export default function DetailScreen({ navigation, route }) {
-	const { state, deleteContact } = useContext(Context);
+	const dispatch = useDispatch();
 	const { id } = route.params;
-	const contactInfo = state.find((cnt) => cnt.id === id);
+
+	const contactInfo = useSelector((state) => getContact(state, id));
+
 	if (!contactInfo) {
 		return null;
 	}
 	const color = getColorByLetter(contactInfo.firstName[0]);
 
+	const handleDeleteContact = () => {
+		dispatch(deleteContact(id));
+		navigation.navigate("MyContact");
+	};
+
 	return (
 		<View style={styles.container} testID="detailScreen">
 			<HeaderComponent
 				title={`${contactInfo.firstName} ${contactInfo.lastName}`}
-				navigation={navigation}
 			/>
 			<ImageBackground
 				style={{
@@ -47,11 +57,7 @@ export default function DetailScreen({ navigation, route }) {
 				</View>
 				<View style={{ marginLeft: "auto" }}>
 					<TouchableOpacity
-						onPress={() =>
-							deleteContact(id, () => {
-								navigation.navigate("MyContact");
-							})
-						}
+						onPress={handleDeleteContact}
 						testID="deleteContactIcon"
 						style={styles.icon}
 					>

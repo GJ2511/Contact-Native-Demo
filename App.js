@@ -4,20 +4,22 @@ import { TouchableOpacity, SafeAreaView, TextInput } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Provider } from "react-redux";
 
 import IndexScreen from "./src/screens/IndexScreen";
 import CreateContactsScreen from "./src/screens/CreateScreen";
 import DetailScreen from "./src/screens/DetailScreen";
 import EditContactsScreen from "./src/screens/EditScreen";
-import { Provider as ContactsProvider } from "./src/context/ContactContext";
+
+import store from "./src/redux/store/store";
 
 const Stack = createStackNavigator();
 
 export default function App() {
 	return (
-		<NavigationContainer>
-			<SafeAreaView style={{ flex: 1 }}>
-				<ContactsProvider>
+		<Provider store={store}>
+			<NavigationContainer>
+				<SafeAreaView style={{ flex: 1 }}>
 					<Stack.Navigator
 						initialRouteName="MyContact"
 						screenOptions={{
@@ -38,10 +40,11 @@ export default function App() {
 						<Stack.Screen
 							name="Edit"
 							component={EditContactsScreen}
+							options={{ title: "Edit Contact" }}
 						/>
 					</Stack.Navigator>
-				</ContactsProvider>
-			</SafeAreaView>
-		</NavigationContainer>
+				</SafeAreaView>
+			</NavigationContainer>
+		</Provider>
 	);
 }

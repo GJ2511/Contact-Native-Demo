@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
 	View,
 	Text,
@@ -7,6 +7,7 @@ import {
 	StyleSheet,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useSelector, useDispatch } from "react-redux";
 
 import { Context } from "../context/ContactContext";
 import SearchBar from "../components/SearchBar";
@@ -14,8 +15,15 @@ import Card from "../components/Card";
 import HeaderComponent from "../components/Header";
 import normalize from "../utils/normalize";
 
+import {
+	loadAllContacts,
+	searchContact,
+} from "../redux/actions/contactActions";
+import { getAllContacts } from "../redux/selectors/contactSelector";
+
 const IndexScreen = ({ navigation }) => {
-	const { state: contacts, deleteContacts } = useContext(Context);
+	const contacts = useSelector(getAllContacts);
+	const dispatch = useDispatch();
 
 	const [term, setTerm] = useState("");
 
@@ -34,11 +42,7 @@ const IndexScreen = ({ navigation }) => {
 
 	return (
 		<View style={styles.container}>
-			<HeaderComponent
-				title={"My Contacts"}
-				navigation={navigation}
-				hideBack={true}
-			/>
+			<HeaderComponent title={"My Contacts"} hideBack={true} />
 			<SearchBar term={term} setTerm={setTerm} />
 			<FlatList
 				data={filterContacts}

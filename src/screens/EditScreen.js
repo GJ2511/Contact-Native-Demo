@@ -1,34 +1,39 @@
 import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
 import ContactForm from "../components/ContactForm";
 import { Context } from "../context/ContactContext";
 import HeaderComponent from "../components/Header";
 import normalize from "../utils/normalize";
+import { getContact } from "../redux/selectors/contactSelector";
+import { updateContact } from "../redux/actions/contactActions";
 
 const EditContactsScreen = ({ navigation, route }) => {
-	const { state, editContact } = useContext(Context);
+	const dispatch = useDispatch();
 	const { id } = route.params;
-	const contactInfo = state.find((cont) => cont.id === id);
+
+	const contactInfo = useSelector((state) => getContact(state, id));
 
 	if (!contactInfo) {
 		return null;
 	}
 
+	const handleSubmit = (contactInfo) => {
+		dispatch(updateContact(contactInfo, id));
+		navigation.navigate("MyContact");
+	};
+
 	return (
 		<>
-			<HeaderComponent title={`Create Contact`} navigation={navigation} />
+			<HeaderComponent title={`Edit Contact`} />
 			<ContactForm
 				buttonText="Update Contact"
 				firstNameInitial={contactInfo.firstName}
 				lastNameInitial={contactInfo.lastName}
 				emailInitial={contactInfo.email}
 				phoneNumberInitial={contactInfo.phoneNumber}
-				onSubmit={(contactInfo) => {
-					editContact(id, contactInfo, () =>
-						navigation.navigate("MyContact")
-					);
-				}}
+				onSubmit={handleSubmit}
 			/>
 		</>
 	);
