@@ -1,7 +1,9 @@
-import { act } from "@testing-library/react-native";
 import * as actions from "../actions/contactTypes";
 
-const INIT_STATE = [
+import { Contact } from '../../types/type'
+import { IAction } from '../../types/interface'
+
+const INIT_STATE: Array<Contact> = [
 	{
 		id: 1,
 		firstName: "Test first name",
@@ -11,7 +13,7 @@ const INIT_STATE = [
 	},
 ];
 
-const contactsReducer = (state = INIT_STATE, action) => {
+const contactsReducer = (state: Array<Contact> = INIT_STATE, action: IAction) => {
 	switch (action.type) {
 		case actions.ADD_CONTACT:
 			return [

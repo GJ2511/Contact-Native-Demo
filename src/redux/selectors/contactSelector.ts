@@ -1,4 +1,4 @@
-const getRoot = (state) => state;
+const getRoot = (state) => state ?? [];
 
 const getAllContacts = (state) => getRoot(state);
 

@@ -5,7 +5,12 @@ import { useNavigation } from "@react-navigation/native";
 
 import normalize from "../utils/normalize";
 
-const HeaderComponent = ({ title, hideBack = false }) => {
+type Props = {
+	title: string;
+	hideBack: boolean;
+};
+
+const HeaderComponent = ({ title, hideBack = false }: Props) => {
 	const navigation = useNavigation();
 
 	return (

@@ -3,10 +3,15 @@ import { View, Text, StyleSheet } from "react-native";
 
 import { getColorByLetter } from "../utils/index";
 import normalize from "../utils/normalize";
+import { Contact } from "../types/type";
 
-export default function Card({ data }) {
-	const { firstName, lastName, phoneNumber } = data;
-	const color = getColorByLetter(firstName[0]);
+type Props = {
+	data: Contact;
+};
+
+export default function Card({ data }: Props) {
+	const { firstName, lastName } = data;
+	const color: string = getColorByLetter(firstName[0]);
 
 	return (
 		<View style={styles.card} testID="contactCard">

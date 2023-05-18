@@ -1,37 +1,27 @@
-import React, { useContext, useState, useEffect } from "react";
-import {
-	View,
-	Text,
-	FlatList,
-	TouchableOpacity,
-	StyleSheet,
-} from "react-native";
+import React, { useState } from "react";
+import { View, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import type { StackScreenProps } from "@react-navigation/stack";
 
-import { Context } from "../context/ContactContext";
 import SearchBar from "../components/SearchBar";
 import Card from "../components/Card";
 import HeaderComponent from "../components/Header";
 import normalize from "../utils/normalize";
-
-import {
-	loadAllContacts,
-	searchContact,
-} from "../redux/actions/contactActions";
 import { getAllContacts } from "../redux/selectors/contactSelector";
+import { RootStackParamList, Contact } from "../types/type";
 
-const IndexScreen = ({ navigation }) => {
-	const contacts = useSelector(getAllContacts);
-	const dispatch = useDispatch();
+type Props = StackScreenProps<RootStackParamList, "MyContact">;
 
+const IndexScreen = ({ navigation }: Props) => {
+	const contacts: Array<Contact> = useSelector(getAllContacts);
 	const [term, setTerm] = useState("");
 
-	const filterContacts =
+	const filterContacts: Array<Contact> =
 		term.length === 0
 			? contacts
-			: contacts.filter((cont) => {
-					const lowerterm = term.toLowerCase();
+			: contacts.filter((cont: Contact) => {
+					const lowerterm: string = term.toLowerCase();
 					return (
 						cont.firstName.toLowerCase().includes(lowerterm) ||
 						cont.lastName.toLowerCase().includes(lowerterm) ||

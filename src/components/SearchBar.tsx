@@ -4,7 +4,12 @@ import { Feather } from "@expo/vector-icons";
 
 import normalize from "../utils/normalize";
 
-const SearchBar = ({ term, setTerm, startSearch }) => {
+type Props = {
+	term: string;
+	setTerm: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const SearchBar = ({ term, setTerm }: Props) => {
 	return (
 		<View style={styles.bar} testID="searchBox">
 			<Feather name="search" style={styles.icon} />
@@ -15,7 +20,6 @@ const SearchBar = ({ term, setTerm, startSearch }) => {
 				placeholder="Search"
 				value={term}
 				onChangeText={setTerm}
-				onEndEditing={startSearch}
 				testID="searchBar"
 			/>
 		</View>

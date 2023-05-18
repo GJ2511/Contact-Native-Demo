@@ -1,7 +1,6 @@
 import "react-native-gesture-handler";
 
-import { TouchableOpacity, SafeAreaView, TextInput } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Provider } from "react-redux";
@@ -12,8 +11,9 @@ import DetailScreen from "./src/screens/DetailScreen";
 import EditContactsScreen from "./src/screens/EditScreen";
 
 import store from "./src/redux/store/store";
+import { RootStackParamList } from "./src/types/type";
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
 	return (

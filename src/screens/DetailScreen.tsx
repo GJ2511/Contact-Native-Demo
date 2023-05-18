@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
 	View,
 	Text,
@@ -6,33 +6,35 @@ import {
 	ImageBackground,
 	Dimensions,
 	Linking,
-	StatusBar,
 	TouchableOpacity,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
+import type { StackScreenProps } from "@react-navigation/stack";
 
 import { getColorByLetter } from "../utils";
-import { Context } from "../context/ContactContext";
 import normalize from "../utils/normalize";
 import HeaderComponent from "../components/Header";
 import { getContact } from "../redux/selectors/contactSelector";
 import { deleteContact } from "../redux/actions/contactActions";
+import { RootStackParamList, Contact } from "../types/type";
 
-export default function DetailScreen({ navigation, route }) {
+type Props = StackScreenProps<RootStackParamList, "Details">;
+
+export default function DetailScreen({ navigation, route }: Props) {
 	const dispatch = useDispatch();
 	const { id } = route.params;
 
-	const contactInfo = useSelector((state) => getContact(state, id));
+	const contactInfo: Contact = useSelector((state) => getContact(state, id));
 
 	if (!contactInfo) {
 		return null;
 	}
-	const color = getColorByLetter(contactInfo.firstName[0]);
+	const color: string = getColorByLetter(contactInfo.firstName[0]);
 
-	const handleDeleteContact = () => {
+	const handleDeleteContact: () => void = () => {
 		dispatch(deleteContact(id));
 		navigation.navigate("MyContact");
 	};

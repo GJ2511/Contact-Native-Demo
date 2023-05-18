@@ -2,9 +2,19 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Button, TextInput, Alert } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import normalize from "../utils/normalize";
+import { Contact } from "../types/type";
 
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 const NUMBER_REGEX = /[^0-9]/g;
+
+type Props = {
+	onSubmit: (data: Contact) => void;
+	firstNameInitial: string;
+	lastNameInitial: string;
+	emailInitial: string;
+	phoneNumberInitial: string;
+	buttonText: string;
+};
 
 export default function ContactForm({
 	onSubmit,
@@ -13,7 +23,7 @@ export default function ContactForm({
 	emailInitial = "",
 	phoneNumberInitial = "",
 	buttonText = "",
-}) {
+}: Props) {
 	const [firstName, setFirstName] = useState(firstNameInitial);
 	const [lastName, setLastName] = useState(lastNameInitial);
 	const [phoneNumber, setPhoneNumber] = useState(phoneNumberInitial);
@@ -30,7 +40,7 @@ export default function ContactForm({
 			return;
 		}
 
-		const contactInfo = {
+		const contactInfo: Contact = {
 			firstName,
 			lastName,
 			phoneNumber,
